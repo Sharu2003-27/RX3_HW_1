@@ -10,7 +10,7 @@ export const taskList = createSlice({
                 status: "Pending",
                 date: "2024-07-15"
             },
-             {
+             { 
                 taskId: 'T2',
                 task: "Go to Gym.",
                 status: "Completed",
@@ -36,7 +36,16 @@ export const taskList = createSlice({
             },
         ]
     },
-    reducers: {}
+    reducers: {
+        taskStatusButton: (state, action) => {
+            const task = state.tasks.find((task) => task.taskId === action.payload)
+            if (task) {
+                task.status = task.status === "Completed" ? "Pending" : "Completed"
+            }
+        }
+    }
 })
+
+export const { taskStatusButton } = taskList.actions
 
 export default taskList.reducer;

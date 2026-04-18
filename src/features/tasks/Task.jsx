@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import { taskStatusButton } from "./taskList"
 
 const Task = () => {
-
+    const dispatch = useDispatch()
     const tasks = useSelector((state) => state.tasks.tasks)
 
     const groupedTasks = tasks.reduce((acc, task) => {
@@ -29,8 +30,10 @@ const Task = () => {
                         {groupedTasks[date].map((task) => (
                             <li key={task.taskId}>
                                 {task.task}
-                                <br />
-                                Status: {task.status}
+                                {" "}
+                                <button onClick={() => dispatch(taskStatusButton(task.taskId))}>
+                                    {task.status}
+                                </button>
                             </li>
                         ))}
                     </ul>
